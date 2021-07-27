@@ -1,7 +1,7 @@
 const { MongoClient, ObjectId } = require('mongodb')
 // Connection URL
 // const url = 'mongodb+srv://admin:Admin123@server-movies.rrpd0.mongodb.net/entertainme'
-const url = 'mongodb://localhost:27017'
+const url =  'mongodb+srv://admin-ammar:admin-ammar@cluster0.samh8.mongodb.net/Sahoot?retryWrites=true&w=majority'
 let db = null
 
 async function connect() {
