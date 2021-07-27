@@ -3,6 +3,8 @@ require('dotenv').config()
 const express = require("express")
 const app = express()
 const cors = require('cors')
+const port = process.env.PORT || 4001 
+
 
 app.use(cors())
 
@@ -16,11 +18,12 @@ app.use(express.urlencoded({
 
 app.use(router);
 
+
 connect()
     .then(async database => {
-        
+
         app.listen(port, () => {
-            // console.log(`listening app at http://localhost:${port}`);
+            console.log(`listening app at http://localhost:${port}`);
         })
     })
     .catch(err => {
