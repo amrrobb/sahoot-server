@@ -21,7 +21,8 @@
   },
   "scripts": {
     "start": "nodemon ./bin/http",
-    "test": "jest --detectOpenHandles --forceExit --runInBand --coverage"
+    "test": "jest --detectOpenHandles --forceExit --runInBand --coverage",
+    "dev": "NODE_ENV=development npx nodemon app.js",
   },
   "keywords": [],
   "author": "",
