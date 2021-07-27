@@ -1,0 +1,30 @@
+[
+  {
+    "userId": 1,
+    "questions": [
+      {
+        "type": "text",
+        "question": "penemu bola lampu ?",
+        "image": "null",
+        "choose": ["aku", "kamu", "dia", "mereka"],
+        "answer": "aku"
+      }
+    ],
+    "timer": 20,
+    "mode": "live"
+  },
+  {
+    "userId": 1,
+    "questions": [
+      {
+        "type": "text",
+        "question": "siap presiden pertama indonesia ?",
+        "image": "null",
+        "choose": ["Soekarno", "Soeharto", "SBY", "Jokowi"],
+        "answer": "Soekarno"
+      }
+    ],
+    "timer": 20,
+    "mode": "challenge"
+  }
+]

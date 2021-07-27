@@ -1,0 +1,29 @@
+{
+  "name": "client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "form-data": "^4.0.0",
+    "google-auth-library": "^7.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^4.0.1",
+    "multer": "^1.4.2"
+  },
+  "devDependencies": {
+    "jest": "^27.0.6",
+    "supertest": "^6.1.4"
+  },
+  "scripts": {
+    "start": "nodemon ./bin/http",
+    "test": "jest --detectOpenHandles --forceExit --runInBand --coverage"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
