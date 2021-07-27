@@ -1,0 +1,26 @@
+{
+  "name": "orchestrator",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@graphql-tools/schema": "^7.1.5",
+    "apollo-server": "^3.0.2",
+    "apollo-server-errors": "^3.0.1",
+    "axios": "^0.21.1",
+    "dayjs": "^1.10.6",
+    "dotenv": "^10.0.0",
+    "graphql": "^15.5.1",
+    "graphql-scalars": "^1.10.0",
+    "ioredis": "^4.27.6",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.21"
+  }
+}
