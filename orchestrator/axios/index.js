@@ -1,15 +1,16 @@
 const axios = require('axios')
+const uri = 'http://54.166.28.112'
 
 const instanceReports = axios.create({
-    baseURL: 'http://localhost:4001/reports',
+    baseURL: `${uri}/reports`,
   });
 
 const instanceQuizzes = axios.create({
-    baseURL: `http://localhost:4001/quizzes`
+    baseURL: `${uri}/quizzes`
 })
 
 const instanceUsers = axios.create({
-  baseURL: `http://localhost:4001`
+  baseURL: `${uri}`
 })
 
 
