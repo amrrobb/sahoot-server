@@ -16,16 +16,16 @@ app.use(express.urlencoded({
 
 app.use(router);
 
-// connect()
-//     .then(async database => {
-//         
-//         app.listen(port, () => {
-//             // console.log(`listening app at http://localhost:${port}`);
-//         })
-//     })
-//     .catch(err => {
-//         console.log(err);
-//     })
+connect()
+    .then(async database => {
+        
+        app.listen(port, () => {
+            // console.log(`listening app at http://localhost:${port}`);
+        })
+    })
+    .catch(err => {
+        console.log(err);
+    })
 
 
 module.exports = app

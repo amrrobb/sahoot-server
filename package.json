@@ -20,9 +20,9 @@
     "supertest": "^6.1.4"
   },
   "scripts": {
-    "start": "nodemon ./bin/http",
+    "start": "node app.js",
     "test": "jest --detectOpenHandles --forceExit --runInBand --coverage",
-    "dev": "NODE_ENV=development npx nodemon app.js",
+    "dev": "NODE_ENV=development npx nodemon app.js"
   },
   "keywords": [],
   "author": "",
