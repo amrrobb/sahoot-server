@@ -62,7 +62,7 @@ const resolvers = {
       try {
         let QuizzesRedis = await redis.get("Quizzes");
         QuizzesRedis = JSON.parse(QuizzesRedis);
-        if (QuizzesRedis && QuizzesRedis[0].userId === context.user.id) {
+        if (QuizzesRedis && (QuizzesRedis[0].userId === context.user.id)) {
           return QuizzesRedis
         } else {
           const Quizzes = await instanceQuizzes({

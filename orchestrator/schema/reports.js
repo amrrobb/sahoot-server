@@ -51,7 +51,7 @@ const resolvers = {
                 // const {input} = args
                 let reports = await redis.get('reports')
                 reports = JSON.parse(reports)
-                if (reports && reports[0].userId === context.user.id) {
+                if (reports && (reports[0].userId === context.user.id)) {
                     result = reports
                 } 
                 else {
@@ -81,6 +81,7 @@ const resolvers = {
                     return reportById
                 } 
                 else {
+                    redis.del('reportById')
                     const {data} = await instanceReports({
                         method: 'get',
                         url: `/${id}`,
@@ -88,6 +89,7 @@ const resolvers = {
                             access_token: context.access_token
                         }
                     })
+                    redis.set('reportById', JSON.stringify(data))
                     return data
                 }
             }
