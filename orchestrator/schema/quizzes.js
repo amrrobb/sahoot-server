@@ -60,49 +60,53 @@ const resolvers = {
   Query: {
     Quizzes: async (_, args, context) => {
       try {
-        let QuizzesRedis = await redis.get("Quizzes");
-        QuizzesRedis = JSON.parse(QuizzesRedis);
-        if (QuizzesRedis && (QuizzesRedis[0].userId === context.user.id)) {
-          return QuizzesRedis
-        } else {
-          const Quizzes = await instanceQuizzes({
-            url: '/',
-            method: 'get',
-            headers: {
-              access_token: context.access_token
-            }
-          })
-          // console.log(JSON.stringify(Quizzes.data));
-          redis.set("Quizzes", JSON.stringify(Quizzes.data));
-          return Quizzes.data
-        }
+        // let QuizzesRedis = await redis.get("Quizzes");
+        // QuizzesRedis = JSON.parse(QuizzesRedis);
+        // if (QuizzesRedis && (QuizzesRedis[0].userId === context.user.id)) {
+        //   return QuizzesRedis
+        // } else {
+        // }
+        const Quizzes = await instanceQuizzes({
+          url: '/',
+          method: 'get',
+          headers: {
+            access_token: context.access_token
+          }
+        })
+        // console.log(JSON.stringify(Quizzes.data));
+        // redis.set("Quizzes", JSON.stringify(Quizzes.data));
+        return Quizzes.data
 
       } catch (err) {
         throw new ApolloError(err);
       }
     },
     QuizzesById: async (_, args, context) => {
-      const QuizzesByIdRadis = await redis.get("QuizzesById")
-
-      if (QuizzesByIdRadis) {
-        const data = JSON.parse(QuizzesByIdRadis);
-        // console.log(data._id);
-        // console.log(args.id, 'ini args');
-        if (data._id === args.id) {
-          // console.log('masuk');
-          return JSON.parse(QuizzesByIdRadis);
+      try {
+        const QuizzesByIdRadis = await redis.get("QuizzesById")
+  
+        if (QuizzesByIdRadis) {
+          const data = JSON.parse(QuizzesByIdRadis);
+          // console.log(data._id);
+          // console.log(args.id, 'ini args');
+          if (data._id === args.id) {
+            // console.log('masuk');
+            return JSON.parse(QuizzesByIdRadis);
+          } else {
+            // console.log('else');
+            redis.del("QuizzesById");
+            const dataQuiz = await instanceQuizzes.get("/" + args.id);
+            redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
+            return dataQuiz.data
+          }
         } else {
-          // console.log('else');
           redis.del("QuizzesById");
           const dataQuiz = await instanceQuizzes.get("/" + args.id);
           redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
-          return dataQuiz.data
+          return dataQuiz.data 
         }
-      } else {
-        redis.del("QuizzesById");
-        const dataQuiz = await instanceQuizzes.get("/" + args.id);
-        redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
-        return dataQuiz.data 
+      } catch (err){
+          throw new ApolloError(err);
       }
     },
   },

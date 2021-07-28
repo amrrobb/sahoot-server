@@ -47,25 +47,25 @@ const resolvers = {
     Query: {
         getReportsAll: async(_, args, context) => {
             try {
-                let result = null
-                // const {input} = args
-                let reports = await redis.get('reports')
-                reports = JSON.parse(reports)
-                if (reports && (reports[0].userId === context.user.id)) {
-                    return reports
-                } 
-                else {
-                    redis.del('reports')
-                    const {data} = await instanceReports({
-                        method: 'get',
-                        headers: {
-                            access_token: context.access_token
-                        }
-                    })
-                    redis.set('reports', JSON.stringify(data))
-                    // result = data
-                    return data
-                }
+                // let result = null
+                // // const {input} = args
+                // let reports = await redis.get('reports')
+                // reports = JSON.parse(reports)
+                // if (reports && (reports[0].userId === context.user.id)) {
+                //     return reports
+                // } 
+                // else {
+                //     // redis.del('reports')
+                // }
+                const {data} = await instanceReports({
+                    method: 'get',
+                    headers: {
+                        access_token: context.access_token
+                    }
+                })
+                // redis.set('reports', JSON.stringify(data))
+                // result = data
+                return data
             }
             catch (err) {
                 throw new ApolloError(err.response.data.message);
