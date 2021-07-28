@@ -48,7 +48,7 @@ const resolvers = {
         getReportsAll: async(_, args, context) => {
             try {
                 // let result = null
-                // // const {input} = args
+                // const {input} = args
                 // let reports = await redis.get('reports')
                 // reports = JSON.parse(reports)
                 // if (reports && (reports[0].userId === context.user.id)) {
@@ -113,7 +113,7 @@ const resolvers = {
                         access_token: context.access_token
                     }
                 })
-                redis.del('reports')
+                // redis.del('reports')
                 return data
             }
             catch (err) {
@@ -130,7 +130,7 @@ const resolvers = {
                         access_token: context.access_token
                     }
                 })
-                redis.del('reports')
+                // redis.del('reports')
                 return ({'message': 'Delete Item Success'})
             }
             catch (err) {
