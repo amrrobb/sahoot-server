@@ -75,24 +75,24 @@ const resolvers = {
         getReports: async (_, args, context) => {
             try {
                 const id = args.id
-                let reportById = await redis.get('reportById')
-                reportById = JSON.parse(reportById)
+                // let reportById = await redis.get('reportById')
+                // reportById = JSON.parse(reportById)
                 
-                if (reportById && reportById._id === id) {
-                    return reportById
-                } 
-                else {
-                    redis.del('reportById')
-                    const {data} = await instanceReports({
-                        method: 'get',
-                        url: `/${id}`,
-                        headers: {
-                            access_token: context.access_token
-                        }
-                    })
-                    redis.set('reportById', JSON.stringify(data))
-                    return data
-                }
+                // if (reportById && reportById._id === id) {
+                //     return reportById
+                // } 
+                // else {
+                //     // redis.del('reportById')
+                // }
+                const {data} = await instanceReports({
+                    method: 'get',
+                    url: `/${id}`,
+                    headers: {
+                        access_token: context.access_token
+                    }
+                })
+                // redis.set('reportById', JSON.stringify(data))
+                return data
             }
             catch (err) {
                 throw new ApolloError(err.response.data.message);

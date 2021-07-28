@@ -1,7 +1,7 @@
 const {gql, ApolloError } = require ('apollo-server')
 const {instanceUsers} = require ('../axios')
-const Redis = require('ioredis')
-const redis = new Redis()
+// const Redis = require('ioredis')
+// const redis = new Redis()
 
 const typeDef = gql`
   type Register {

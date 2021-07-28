@@ -83,28 +83,29 @@ const resolvers = {
     },
     QuizzesById: async (_, args, context) => {
       try {
-        const QuizzesByIdRadis = await redis.get("QuizzesById")
+        // const QuizzesByIdRadis = await redis.get("QuizzesById")
   
-        if (QuizzesByIdRadis) {
-          const data = JSON.parse(QuizzesByIdRadis);
-          // console.log(data._id);
-          // console.log(args.id, 'ini args');
-          if (data._id === args.id) {
-            // console.log('masuk');
-            return JSON.parse(QuizzesByIdRadis);
-          } else {
-            // console.log('else');
-            redis.del("QuizzesById");
-            const dataQuiz = await instanceQuizzes.get("/" + args.id);
-            redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
-            return dataQuiz.data
-          }
-        } else {
-          redis.del("QuizzesById");
-          const dataQuiz = await instanceQuizzes.get("/" + args.id);
-          redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
-          return dataQuiz.data 
-        }
+        // if (QuizzesByIdRadis) {
+        //   const data = JSON.parse(QuizzesByIdRadis);
+        //   // console.log(data._id);
+        //   // console.log(args.id, 'ini args');
+        //   if (data._id === args.id) {
+        //     // console.log('masuk');
+        //     return JSON.parse(QuizzesByIdRadis);
+        //   } else {
+        //     // console.log('else');
+        //     // redis.del("QuizzesById");
+        //     const dataQuiz = await instanceQuizzes.get("/" + args.id);
+        //     redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
+        //     return dataQuiz.data
+        //   }
+        // } else {
+        //   // redis.del("QuizzesById");
+        // }
+
+        const dataQuiz = await instanceQuizzes.get("/" + args.id);
+        // redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
+        return dataQuiz.data 
       } catch (err){
           throw new ApolloError(err);
       }
@@ -120,7 +121,7 @@ const resolvers = {
             access_token: context.access_token
           }
         });
-        redis.del("Quizzes");
+        // redis.del("Quizzes");
         return destroyQuiz.data
       } catch (err) {
         // console.log(err.response.data.message);
@@ -139,7 +140,7 @@ const resolvers = {
             access_token: context.access_token
           }
         });
-        redis.del("Quizzes");
+        // redis.del("Quizzes");
         return updateQuizzes.data;
       } catch (err) {
         throw new ApolloError(err.response.data.message);
@@ -159,7 +160,7 @@ const resolvers = {
         });
 
         // console.log(postQuizzes.data, 'masuk<<<<<<<');
-        redis.del("Quizzes");
+        // redis.del("Quizzes");
         return postQuizzes.data;
       } catch (err) {
         throw new ApolloError(err.response.data.message);
