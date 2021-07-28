@@ -52,7 +52,7 @@ const resolvers = {
                 let reports = await redis.get('reports')
                 reports = JSON.parse(reports)
                 if (reports && (reports[0].userId === context.user.id)) {
-                    result = reports
+                    return reports
                 } 
                 else {
                     const {data} = await instanceReports({
@@ -62,9 +62,9 @@ const resolvers = {
                         }
                     })
                     redis.set('reports', JSON.stringify(data))
-                    result = data
+                    // result = data
+                    return data
                 }
-                return result
             }
             catch (err) {
                 throw new ApolloError(err.response.data.message);

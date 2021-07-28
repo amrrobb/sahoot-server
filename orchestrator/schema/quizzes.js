@@ -76,6 +76,7 @@ const resolvers = {
           redis.set("Quizzes", JSON.stringify(Quizzes.data));
           return Quizzes.data
         }
+
       } catch (err) {
         throw new ApolloError(err);
       }
@@ -95,6 +96,7 @@ const resolvers = {
           redis.del("QuizzesById");
           const dataQuiz = await instanceQuizzes.get("/" + args.id);
           redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
+          return dataQuiz.data
         }
       } else {
         const dataQuiz = await instanceQuizzes.get("/" + args.id);

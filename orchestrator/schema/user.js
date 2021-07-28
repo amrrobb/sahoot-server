@@ -42,7 +42,6 @@ const resolvers = {
         }
         const res = await instanceUsers.post('/register', data)
         const output = await res.data
-        redis.del('Register')
         return output
         
       } catch (err) {
@@ -57,7 +56,6 @@ const resolvers = {
         }
         const res = await instanceUsers.post('/login', data)
         const output = await res.data
-        redis.del('Login')
         return output
         
       } catch (err) {
@@ -71,7 +69,6 @@ const resolvers = {
         }
         const res = await instanceUsers.put(`/googlelogin`, data)
         const output = await res.data
-        redis.del('GoogleLogin')
         return output
         
       } catch (err) {
