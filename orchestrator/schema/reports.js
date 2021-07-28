@@ -1,8 +1,6 @@
 const { gql } = require('apollo-server')
 const { ApolloError } = require('apollo-server-errors')
 const { instanceReports } = require('../axios')
-const Redis = require('ioredis')
-const redis = new Redis()
 
 const typeDef = gql`
     type Report {
