@@ -101,6 +101,7 @@ const resolvers = {
       } else {
         const dataQuiz = await instanceQuizzes.get("/" + args.id);
         redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
+        return dataQuiz.data 
       }
     },
   },
