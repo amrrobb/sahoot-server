@@ -60,12 +60,6 @@ const resolvers = {
   Query: {
     Quizzes: async (_, args, context) => {
       try {
-        // let QuizzesRedis = await redis.get("Quizzes");
-        // QuizzesRedis = JSON.parse(QuizzesRedis);
-        // if (QuizzesRedis && (QuizzesRedis[0].userId === context.user.id)) {
-        //   return QuizzesRedis
-        // } else {
-        // }
         const Quizzes = await instanceQuizzes({
           url: '/',
           method: 'get',
@@ -73,8 +67,6 @@ const resolvers = {
             access_token: context.access_token
           }
         })
-        // console.log(JSON.stringify(Quizzes.data));
-        // redis.set("Quizzes", JSON.stringify(Quizzes.data));
         return Quizzes.data
 
       } catch (err) {
@@ -103,7 +95,13 @@ const resolvers = {
         //   // redis.del("QuizzesById");
         // }
 
-        const dataQuiz = await instanceQuizzes.get("/" + args.id);
+        const dataQuiz = await instanceQuizzes({
+          url: `/${id}`,
+          method: 'get',
+          headers: {
+            access_token: context.access_token
+          }
+        })
         // redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
         return dataQuiz.data 
       } catch (err){
