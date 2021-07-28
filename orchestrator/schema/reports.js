@@ -30,13 +30,13 @@ const typeDef = gql`
     } 
 
     extend type Query {
-        getReportsAll(quizId: String): [Report]
-        getReports(id: ID): Report
+        getReportsAll(quizId: String, access_token: String): [Report]
+        getReports(id: ID, access_token: String): Report
     }
 
     extend type Mutation {
-        addReports(input: InputReport): Report
-        delReports(id: ID): Message
+        addReports(input: InputReport, access_token: String): Report
+        delReports(id: ID, access_token: String): Message
     }  
 `
 
@@ -45,7 +45,7 @@ const resolvers = {
     Query: {
         getReportsAll: async(_, args, context) => {
             try {
-                // let result = null
+                const {access_token} = args
                 // const {input} = args
                 // let reports = await redis.get('reports')
                 // reports = JSON.parse(reports)
@@ -58,7 +58,7 @@ const resolvers = {
                 const {data} = await instanceReports({
                     method: 'get',
                     headers: {
-                        access_token: context.access_token
+                        access_token: args.access_token
                     }
                 })
                 // redis.set('reports', JSON.stringify(data))
@@ -86,7 +86,7 @@ const resolvers = {
                     method: 'get',
                     url: `/${id}`,
                     headers: {
-                        access_token: context.access_token
+                        access_token: args.access_token
                     }
                 })
                 // redis.set('reportById', JSON.stringify(data))
@@ -108,7 +108,7 @@ const resolvers = {
                     method: 'post',
                     data: input,
                     headers: {
-                        access_token: context.access_token
+                        access_token: args.access_token
                     }
                 })
                 // redis.del('reports')
@@ -125,7 +125,7 @@ const resolvers = {
                     method: 'delete',
                     url: `/${id}`,
                     headers: {
-                        access_token: context.access_token
+                        access_token: args.access_token
                     }
                 })
                 // redis.del('reports')

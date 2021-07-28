@@ -39,17 +39,17 @@ const typeDef = gql`
   }
 
   extend type Query {
-    Quizzes: [Quizzes]
-    QuizzesById(id: ID): Quizzes
+    Quizzes(access_token: String): [Quizzes]
+    QuizzesById(id: ID, access_token: String): Quizzes
   }
 
   extend type Mutation {
-    DeleteQuizzes(id: ID): Message
+    DeleteQuizzes(id: ID, access_token: String): Message
     EditQuizzes(
-      id: ID, input: InputQuizzes
+      id: ID, input: InputQuizzes, access_token: String
     ): Quizzes
     AddQuizzes(
-      input: InputQuizzes
+      input: InputQuizzes, access_token: String
     ): Quizzes
   }
 `;
@@ -62,7 +62,7 @@ const resolvers = {
           url: '/',
           method: 'get',
           headers: {
-            access_token: context.access_token
+            access_token: args.access_token
           }
         })
         return Quizzes.data
@@ -92,12 +92,13 @@ const resolvers = {
         // } else {
         //   // redis.del("QuizzesById");
         // }
+        const {id} = args
 
         const dataQuiz = await instanceQuizzes({
           url: `/${id}`,
           method: 'get',
           headers: {
-            access_token: context.access_token
+            access_token: args.access_token
           }
         })
         // redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
@@ -114,7 +115,7 @@ const resolvers = {
           url: `/${args.id}`,
           method: 'delete',
           headers: {
-            access_token: context.access_token
+            access_token: args.access_token
           }
         });
         // redis.del("Quizzes");
@@ -133,7 +134,7 @@ const resolvers = {
           method: 'put',
           data: data,
           headers: {
-            access_token: context.access_token
+            access_token: args.access_token
           }
         });
         // redis.del("Quizzes");
@@ -151,7 +152,7 @@ const resolvers = {
           method: 'post',
           data: data,
           headers: {
-            access_token: context.access_token
+            access_token: args.access_token
           }
         });
 
