@@ -99,6 +99,7 @@ const resolvers = {
           return dataQuiz.data
         }
       } else {
+        redis.del("QuizzesById");
         const dataQuiz = await instanceQuizzes.get("/" + args.id);
         redis.set("QuizzesById", JSON.stringify(dataQuiz.data));
         return dataQuiz.data 

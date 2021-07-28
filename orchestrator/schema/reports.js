@@ -55,6 +55,7 @@ const resolvers = {
                     return reports
                 } 
                 else {
+                    redis.del('reports')
                     const {data} = await instanceReports({
                         method: 'get',
                         headers: {
